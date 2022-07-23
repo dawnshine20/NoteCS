@@ -9,7 +9,7 @@ namespace Note.Algorithm
 {
     public static class Sort
     {
-        public static void InsertionSort<T>(IList<T> list, Comparison<T> comparison)
+        public static void InsertionSort<T>(IList<T> list, Comparison<T> comparison) where T : IComparable
         {
             if (list == null)
                 throw new ArgumentNullException("list");
@@ -17,11 +17,16 @@ namespace Note.Algorithm
                 throw new ArgumentNullException("comparison");
 
             int count = list.Count;
+
+            // Ascending - If the next value is large,
+            // replace the current value with the next value.
             for (int j = 1; j < count; j++)
             {
                 T key = list[j];
 
                 int i = j - 1;
+
+                // Return 1 if the next value is greater than the current value
                 for (; i >= 0 && comparison(list[i], key) > 0; i--)
                 {
                     list[i + 1] = list[i];

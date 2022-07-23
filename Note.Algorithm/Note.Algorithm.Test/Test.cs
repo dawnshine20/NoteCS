@@ -5,10 +5,12 @@ using System.Diagnostics;
 namespace Note.Algorithm.Test
 {
     [TestClass]
-    public class SortTest
+    public class Test
     {
+        // Link for algorithmic speed table:
+        // https://gmlwjd9405.github.io/2018/05/10/algorithm-heap-sort.html
         [TestMethod]
-        public void UnStable()
+        public void UnStableSorting()
         {
             List<Person> list = new List<Person>()
             {
@@ -24,7 +26,7 @@ namespace Note.Algorithm.Test
                 list.Add(new Person("Z", i));
             }
 
-            // General Function (Quick, Heap)
+            // General Function --->Speed (Quick(nlogn~n^2), Heap(nlogn))
             list.Sort();
 
             Debug.WriteLine("Unstable List Sort:");
@@ -32,11 +34,12 @@ namespace Note.Algorithm.Test
             {
                 Debug.WriteLine(p);
             }
-            Debug.WriteLine("stop");
+
+            Debug.WriteLine(String.Empty);
         }
 
         [TestMethod]
-        public void Stable()
+        public void StableSorting()
         {
             List<Person> list = new List<Person>()
             {
@@ -52,7 +55,7 @@ namespace Note.Algorithm.Test
                 list.Add(new Person("Z", i));
             }
 
-            // My Function (Merge)
+            // My Function --->Speed (Merge(nlogn), Insert(n~n^2), bubble(n^2)) 
             Sort.InsertionSort<Person>(list, Person.Compare);
 
             Debug.WriteLine("Stable Insertion Sort:");
@@ -60,7 +63,33 @@ namespace Note.Algorithm.Test
             {
                 Debug.WriteLine(p);
             }
-            Debug.WriteLine("stop");
+            Debug.WriteLine(String.Empty);
+        }
+
+
+        [TestMethod]
+        public void BinarySearching()
+        {
+            const int solution = 20;
+            List<Person> list = new List<Person>();
+
+            for (int i = 0; i < 20; i++)
+            {
+                list.Add(new Person("Z", i));
+            }
+            list.Add(new Person("Z", solution));
+            for (int i = 21; i < 30; i++)
+            {
+                list.Add(new Person("Z", i));
+            }
+
+            // My Function ---> look for people of the same age
+            int answer = Search.BinarySearch<Person>(list, new Person("HB", solution), Person.Compare);
+
+            Debug.WriteLine(String.Join(',',list));
+            Assert.IsTrue(answer == solution);
+            
+            Debug.WriteLine(String.Empty);
         }
     }
 }

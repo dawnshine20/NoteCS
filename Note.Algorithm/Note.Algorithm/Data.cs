@@ -26,14 +26,22 @@ namespace Note.Algorithm
             return result;
         }
 
-        public static int Compare(Person x, Person y)
+        /// <summary>
+        /// Return 1 if value is large based on key, 
+        /// return -1 if less, 
+        /// return 0 if equal
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static int Compare(Person value, Person key)
         {
             int result = 1;
-            if (x != null && x is Person &&
-                y != null && y is Person)
+            if (value != null && value is Person &&
+                key != null && key is Person)
             {
-                Person personX = (Person)x;
-                Person personY = (Person)y;
+                Person personX = (Person)value;
+                Person personY = (Person)key;
                 result = personX.CompareTo(personY);
             }
             return result;
