@@ -36,5 +36,28 @@ namespace Note.Algorithm
         }
 
         
+
+        public static void moveZeros(int[] nums)
+        {
+            int wideIndex = 0;
+            // idx will pointing not zero value then, copy value
+            for (int idx = 0; idx < nums.Length; idx++)
+            {
+                if(nums[idx] != 0)
+                {
+                    // copy
+                    nums[wideIndex] = nums[idx];
+                    wideIndex++;
+                }
+            }
+            // After scanning all indexes and
+            // recognizing that there are no zeros
+            for (; wideIndex < nums.Length; wideIndex++)
+            {
+                nums[wideIndex] = 0;
+            }
+        }
+
+
     }
 }

@@ -1,11 +1,16 @@
-
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Note.Algorithm;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Note.Algorithm.Test
+namespace Note.Algorithm.Tests
 {
-    [TestClass]
-    public class Test
+    [TestClass()]
+    public class SortTests
     {
         // Link for algorithmic speed table:
         // https://gmlwjd9405.github.io/2018/05/10/algorithm-heap-sort.html
@@ -66,30 +71,26 @@ namespace Note.Algorithm.Test
             Debug.WriteLine(String.Empty);
         }
 
-
-        [TestMethod]
-        public void BinarySearching()
+        [TestMethod()]
+        public void moveZerosTest()
         {
-            const int solution = 20;
-            List<Person> list = new List<Person>();
-
-            for (int i = 0; i < 20; i++)
+            int[] solution = new int[] { 5, 7, 6, 3, 0, 0 };
+            // # leet Code 283.Move Zeros
+            // # Concept - 
+            // [0 5 0 7 6 3] ==> [5 7 6 3 0 0]
+            // case : Hold on to 0 and swap to the right and move one space at a time
+            // O (N * number of 0) == Bubble Swap
+            //
+            // At the heart of the Array issue:
+            // 1. Use two index pointers.
+            // 2. You don't have to swap. Just Copy it. (Overtise the rest to 0)
+            int[] values = new int[] { 0, 5, 0, 7, 6, 3 };
+            Sort.moveZeros(values);
+            for (int i = 0; i < values.Length; i++)
             {
-                list.Add(new Person("Z", i));
+                Assert.AreEqual(values[i], solution[i]);
             }
-            list.Add(new Person("Z", solution));
-            for (int i = 21; i < 30; i++)
-            {
-                list.Add(new Person("Z", i));
-            }
-
-            // My Function ---> look for people of the same age
-            int answer = Search.BinarySearch<Person>(list, new Person("HB", solution), Person.Compare);
-
-            Debug.WriteLine(String.Join(',',list));
-            Assert.IsTrue(answer == solution);
             
-            Debug.WriteLine(String.Empty);
         }
     }
 }
